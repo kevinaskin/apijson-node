@@ -56,7 +56,7 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 
 # 使用文档
 
-> 以下例子中 默认存在两张表（Comment， User）
+> 以下例子中 默认存在两张表(Comment， User)，实际使用时，需要在添加对应的entity，在service中引入即可
 
 
 已经实现的操作符
