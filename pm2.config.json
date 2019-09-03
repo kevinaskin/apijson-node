@@ -1,7 +1,7 @@
 {
   "apps": [{
     "name": "ai-apijson-node",
-    "script": "node ./index.js",
+    "script": "./dist/http/main.js",
     "log_date_format": "YYYY-MM-DD HH:mm:ss",
     "instances" : 4,
     "instance_var": "INSTANCE_ID",

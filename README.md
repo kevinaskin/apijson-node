@@ -85,7 +85,7 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
         }
       }
     ```
-
+  ![list](./asserts/list.png)
 - \#
 
   操作符名称： 别名
@@ -114,6 +114,8 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
   }
   ```
 
+  ![column](./asserts/column.png)
+
 
 - 联表查询
 
@@ -129,7 +131,10 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
       "userId@": "User/id"
     }
   }
+  ```
+  ![union-query](./asserts/union-query.png)
 
+  ```json
   // 查询所有符合条件的comment 显示 第1页 每页2条
   // (因为默认page = 1 count = 10 所以默认最多为10条)
   {
@@ -146,6 +151,7 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
   }
   
   ```
+  ![union-list-query](./asserts/union-list-query.png)
 
 
 - 综合例子
@@ -160,7 +166,8 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 	  "testAlias#": {
 	    "msgList[]": {
 	      "Comment": {
-		"userId@": "userInfo#/User/id"
+          "userId@": "userInfo#/User/id",
+          "@column": "comment"
 	      },
 	      "count": 2,
 	      "page": 1
@@ -168,3 +175,5 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 	  }
 	}
 	```
+
+  ![mix](./asserts/mix.png)
