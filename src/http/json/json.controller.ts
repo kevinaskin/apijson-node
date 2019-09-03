@@ -37,12 +37,24 @@ export class JsonController {
     }
 
     const normalizedData = data => {
-      data = JSON.stringify(data)
-      data = data
-        .replace(/\#/g, '') // replace "#" operation arg
-        .replace(/\[\]/g, '')
-
-      return JSON.parse(data)
+      Object.keys(data).forEach(key => {
+        const normalizedKey = key
+          .replace(/\#/g, '') // replace "#" operation arg
+          .replace(/\[\]/g, '')
+        if (normalizedKey !== key) {
+          const tmp = data[key]
+          data[normalizedKey] = tmp
+          delete data[key]
+          if (typeof data[normalizedKey] === 'object') {
+            normalizedData(data[normalizedKey])
+          }
+        } else {
+          if (typeof data[key] === 'object') {
+            normalizedData(data[key])
+          }
+        }
+      })
+      return data
     }
 
     while (jobList.length) {
