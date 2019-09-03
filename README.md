@@ -46,6 +46,7 @@ $ npm install
 
 - `npm start`
 - 健康检查 `http://localhost:3000/test` 正常情况下会返回 `ok`
+- 使用 `pm2` 可以直接 用 `pm2 start ./pm2.config.json` 启动
 
 ----------
  
@@ -148,21 +149,21 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 
 - 综合例子
 
-```json
-{
-  "userInfo#": {
-    "User": {
-      "user": "tony"
-    }
-  },
-  "testAlias#": {
-    "msgList[]": {
-      "Comment": {
-        "userId@": "userInfo#/User/id"
-      },
-      "count": 2,
-      "page": 1
-    }
-  }
-}
-```
+	```json
+	{
+	  "userInfo#": {
+	    "User": {
+	      "user": "tony"
+	    }
+	  },
+	  "testAlias#": {
+	    "msgList[]": {
+	      "Comment": {
+		"userId@": "userInfo#/User/id"
+	      },
+	      "count": 2,
+	      "page": 1
+	    }
+	  }
+	}
+	```
