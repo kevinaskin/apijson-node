@@ -19,6 +19,8 @@ $ npm install
 
 修改 `ormconfig.js` 参照 `ormconfig.js.example`
 
+测试数据库为 `apijson.sql`, 如需体验可自行导入本地数据库测试
+
     {
       "type": "mysql",
       "host": "localhost",
