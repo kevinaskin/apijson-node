@@ -78,8 +78,9 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
   例子：
 
     ```json
+      // 这里[]前的字符串将作为response的字段名
       {
-        "XXX[]": {  // 这里[]前的字符串将作为response的字段名
+        "XXX[]": {
           "Comment": {}
         }
       }
