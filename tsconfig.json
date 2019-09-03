@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "lib": [],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "sourceMap": true,
+    "allowJs": true,
+    "outDir": "./dist"
+  },
+    "include": [
+    "src/**/*"
+  ],
+    "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

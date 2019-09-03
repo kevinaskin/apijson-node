@@ -1,0 +1,1 @@
+// export some COMMON CONSTANT here
