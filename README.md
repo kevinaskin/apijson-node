@@ -143,10 +143,10 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
     },
     "msgList[]": {
     	"Comment": {
-        "userId@": "User/id"
-	    },
-	    "count": 2,
-	    "page": 1
+	    "userId@": "User/id"
+	},
+	"count": 2,
+	"page": 1
     }
   }
   
