@@ -16,5 +16,19 @@ export class UserEntity {
 }
 
 export const User = {
-  column: ['id', 'user', 'nickname', 'role']
+  column: [{
+    key: 'id',
+    desc: 'ID'
+  }, {
+    key: 'user',
+    desc: '用户名'
+  }, {
+    key: 'nickname',
+    desc: '昵称'
+  }, {
+    key: 'role',
+    desc: '角色'
+  }],
+  primary: ['id'],
+  desc: '用户表'
 }

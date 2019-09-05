@@ -7,7 +7,8 @@ export interface JobInterface {
   table: string,
   options: any,
   ListOptions?: any,
-  replacePath: string[]
+  replacePath: string[],
+  config?: any
 }
 
 interface listUnionOptionsInterface {
@@ -74,7 +75,7 @@ export class RequestParser {
         return
       }
       // 校验column合法性，entity合法性，或为别名（#结尾）的情况
-      const COLUMN_LIST = safeGet(TABLE_CONFIG, `${parentTableName}.column`, [])
+      const COLUMN_LIST = safeGet(TABLE_CONFIG, `${parentTableName}.column`, []).map(i => i.key)
       if ([
         ...ENTITY_LIST, 
         ...COLUMN_LIST, 
@@ -161,7 +162,7 @@ export class RequestParser {
       return
     } else {
       let queryTable = targetTables[0]
-      const { column } = TABLE_CONFIG[queryTable] || []
+      const column = TABLE_CONFIG[queryTable] && TABLE_CONFIG[queryTable].column.map(i => i.key) || []
       const options = {}
       const ListOptions = {
         page: 1,
@@ -180,7 +181,6 @@ export class RequestParser {
             } else if (column.indexOf(normalizedKey) > -1) {
               // 数组中的联表查询
               LIST_JOB_FLAG = false
-              console.log('??', key, subKey, field, parentPath)
               listUnionOptions = {
                 key: subKey, 
                 body: body[field][subKey], 
@@ -223,7 +223,7 @@ export class RequestParser {
 
   handleSingleJob(key: string, body: any, parentPath: string[]): void {
     console.log('start SINGLE_JOB', key, body, parentPath)
-    const column = TABLE_CONFIG[key] && TABLE_CONFIG[key].column || []
+    const column = TABLE_CONFIG[key] && TABLE_CONFIG[key].column.map(i => i.key) || []
     
     let SINGLE_JOB_FLAG = true
 
@@ -263,6 +263,12 @@ export class RequestParser {
   }
 
   createJob (job: JobInterface, tail: boolean = true) {
+    job = {
+      config: {
+        primary: safeGet(TABLE_CONFIG, `${job.table}.primary`, '')
+      },
+      ...job
+    }
     if (tail) {
       this.queue.push(job)
     } else {

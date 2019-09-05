@@ -1,4 +1,5 @@
 import { Get, Controller } from '@nestjs/common'
+import { config } from '../entities'
 
 @Controller()
 export class AppController {
@@ -8,5 +9,10 @@ export class AppController {
   @Get('/test')
   root(): string {
     return 'ok'
+  }
+
+  @Get('/table')
+  getTable(): any {
+    return config
   }
 }

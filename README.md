@@ -56,8 +56,14 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 
 # 使用文档
 
+
 > 以下例子中 默认存在两张表(Comment， User)，实际使用时，需要在添加对应的entity，在service中引入即可
 
+查看当前可用的table 可访问 `GET /table` 
+
+- 通用查询接口 `POST /apijson/get`
+- 通用新增接口 `POST /apijson/add`
+- 通用修改接口 `POST /apijson/update`
 
 已经实现的操作符
 
@@ -85,7 +91,6 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
         }
       }
     ```
-  ![list](./asserts/list.png)
 - \#
 
   操作符名称： 别名
@@ -113,10 +118,6 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
     }
   }
   ```
-
-  ![column](./asserts/column.png)
-
-
 - 联表查询
 
   例子：
@@ -132,8 +133,6 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
     }
   }
   ```
-  ![union-query](./asserts/union-query.png)
-
   ```json
   // 查询所有符合条件的comment 显示 第1页 每页2条
   // (因为默认page = 1 count = 10 所以默认最多为10条)
@@ -151,8 +150,6 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
   }
   
   ```
-  ![union-list-query](./asserts/union-list-query.png)
-
 
 - 综合例子
 
@@ -175,5 +172,3 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 	  }
 	}
 	```
-
-  ![mix](./asserts/mix.png)

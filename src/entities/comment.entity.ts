@@ -13,5 +13,16 @@ export class CommentEntity {
 }
 
 export const Comment = {
-  column: ['id', 'comment', 'userId']
+  column: [{
+    key: 'id',
+    desc: 'ID'
+  }, {
+    key: 'comment',
+    desc: '评论'
+  }, {
+    key: 'userId',
+    desc: '关联的用户Id'
+  }],
+  primary: 'id',
+  desc: '评论表'
 }

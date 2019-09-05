@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "api-json-node",
+    "name": "apijson-node",
     "script": "./dist/http/main.js",
     "log_date_format": "YYYY-MM-DD HH:mm:ss",
     "instances" : 4,
