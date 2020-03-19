@@ -1379,7 +1379,10 @@ export class ApiJsonAppConfigController {
   async saveDb(@Request() req, @Body() data) {
     if (!req.session.userInfo) return baseHandler(403, {}, '未登录')
 
-    const {id} = data
+    const {id, key} = data
+    if (key === 'default') {
+      return baseHandler(HttpStatus.BAD_REQUEST, {}, 'default是保留key,请使用其他值')
+    }
     try {
       if (Number(id) > 0) {
         // edit

@@ -47,12 +47,19 @@ export const dbConfig = [
     type: 'sqlite',
     database: resolve(__dirname, '../../ConfigDatabase.db'),
     entities: [
-      ApiJsonUserEntity, ApiJsonConfigEntity, // v1
+      ApiJsonUserEntity, ApiJsonConfigEntity,
 
       ApiJsonAppConfigEntity, ApiJsonCustomMidEntity, ApiJsonRoleAliasEntity, 
       ApiJsonRoleConfigEntity, ApiJsonTableRightEntity, 
-      ApiJsonTableConfigEntity,ApiJsonDBConfigEntity // v2
+      ApiJsonTableConfigEntity,ApiJsonDBConfigEntity
     ],
+    synchronize: false
+  }),
+  TypeOrmModule.forRoot({
+    name: 'default',
+    type: 'sqlite',
+    database: resolve(__dirname, '../../Test.db'),
+    entities: [ \`\${ [ 'development' ].indexOf(process.env.NODE_ENV) > -1 ? 'src' : 'dist' }/**/**.entity{.ts,.js}\` ],
     synchronize: false
   }),
   ${dbList.map(db => genSqlConfigSlice(db))}

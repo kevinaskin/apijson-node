@@ -27,15 +27,10 @@ export const dbConfig = [
     ],
     synchronize: false
   }),
-  
   TypeOrmModule.forRoot({
     name: 'default',
-    type: 'mysql',
-    host: "localhost", // 配置 host
-    port: 3306, // 配置 port
-    username: "", // 配置 username
-    password: "", // 配置 password
-    database: "", // 配置数据库名
+    type: 'sqlite',
+    database: resolve(__dirname, '../../Test.db'),
     entities: [ `${ [ 'development' ].indexOf(process.env.NODE_ENV) > -1 ? 'src' : 'dist' }/**/**.entity{.ts,.js}` ],
     synchronize: false
   })
