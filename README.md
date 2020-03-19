@@ -4,6 +4,15 @@
 
 ----------
 
+# 测试环境
+
+添加hosts
+```
+# /etc/hosts
+192.168.94.186 apijson.guahao-test.com
+```
+测试环境地址 http://apijson.guahao-test.com
+
 # 起步
 
 ## 安装依赖
@@ -18,8 +27,6 @@ $ npm install
 ## Database数据库配置
 
 修改 `ormconfig.js` 参照 `ormconfig.js.example`
-
-测试数据库为 `apijson.sql`, 如需体验可自行导入本地数据库测试
 
     {
       "type": "mysql",
@@ -46,7 +53,6 @@ $ npm install
 
 - `npm start`
 - 健康检查 `http://localhost:3000/test` 正常情况下会返回 `ok`
-- 使用 `pm2` 可以直接 用 `pm2 start ./pm2.config.json` 启动
 
 ----------
  
@@ -56,14 +62,8 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 
 # 使用文档
 
+> 以下例子中 默认存在两张表（Comment， User）
 
-> 以下例子中 默认存在两张表(Comment， User)，实际使用时，需要在添加对应的entity，在service中引入即可
-
-查看当前可用的table 可访问 `GET /table` 
-
-- 通用查询接口 `POST /apijson/get`
-- 通用新增接口 `POST /apijson/add`
-- 通用修改接口 `POST /apijson/update`
 
 已经实现的操作符
 
@@ -83,14 +83,14 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
 
   例子：
 
-    ```json
-      // 这里[]前的字符串将作为response的字段名
+    ```
       {
-        "XXX[]": {
+        "XXX[]": {  // 这里[]前的字符串将作为response的字段名
           "Comment": {}
         }
       }
     ```
+
 - \#
 
   操作符名称： 别名
@@ -118,10 +118,29 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
     }
   }
   ```
+
+- %
+  
+  操作符名称： DateRange
+
+  例子：
+  ```
+  {
+    "User": {
+      "createdAt%": "2019-11-01,"   // 表示 2019-11-01至今
+                                    // ",2019-11-01" 表示2019-11-01之前
+                                    // "2019-11-01, 2019-11-02" 时间范围
+                                    // "2019-11-01 00:00, 2019-11-01 14:00" 小时分钟也是支持的
+                                    // 只要 时间字符串 可以被  `Date.parse(timeString)` 解析 都是可以通过的
+    }
+  }
+  ```
+
+
 - 联表查询
 
   例子：
-  ```json
+  ```
   // 查询叫tony的User
   // 查询一条userId为User中id的Comment
   {
@@ -132,8 +151,7 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
       "userId@": "User/id"
     }
   }
-  ```
-  ```json
+
   // 查询所有符合条件的comment 显示 第1页 每页2条
   // (因为默认page = 1 count = 10 所以默认最多为10条)
   {
@@ -142,33 +160,33 @@ This example repo uses the NestJS swagger module for API documentation. [NestJS 
     },
     "msgList[]": {
     	"Comment": {
-	    "userId@": "User/id"
-	},
-	"count": 2,
-	"page": 1
+        "userId@": "User/id"
+	    },
+	    "count": 2,
+	    "page": 1
     }
   }
   
   ```
 
+
 - 综合例子
 
-	```json
-	{
-	  "userInfo#": {
-	    "User": {
-	      "user": "tony"
-	    }
-	  },
-	  "testAlias#": {
-	    "msgList[]": {
-	      "Comment": {
-          "userId@": "userInfo#/User/id",
-          "@column": "comment"
-	      },
-	      "count": 2,
-	      "page": 1
-	    }
-	  }
-	}
-	```
+```json
+{
+  "userInfo#": {
+    "User": {
+      "user": "tony"
+    }
+  },
+  "testAlias#": {
+    "msgList[]": {
+      "Comment": {
+        "userId@": "userInfo#/User/id"
+      },
+      "count": 2,
+      "page": 1
+    }
+  }
+}
+```

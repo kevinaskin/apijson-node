@@ -5,5 +5,5 @@ import { successHandler, baseHandler, HTTP_CODE } from './resHandler'
 export {
   successHandler,
   baseHandler,
-  HTTP_CODE
+  HTTP_CODE,
 }

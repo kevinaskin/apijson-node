@@ -1,0 +1,16 @@
+{
+  "apps": [{
+    "name": "ai-apijson-node",
+    "script": "./dist/http/main.js",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "instances" : 1,
+    "instance_var": "INSTANCE_ID",
+    "exec_mode": "cluster",
+    "min_uptime": "60s",
+    "max_memory_restart": "600M",
+    "max_restarts": 2,
+    "env": {
+      "NODE_ENV": "test"
+    }
+  }]
+}

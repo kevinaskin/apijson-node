@@ -1,0 +1,31 @@
+import * as helper from './index'
+
+describe('helperTest', () => {
+  describe('HTTP_CODE valid', () => {
+    it('should be number', () => {
+      Object.keys(helper.HTTP_CODE).forEach(key => {
+        expect(typeof helper.HTTP_CODE[key] === 'number').toBe(true)
+      })
+    })
+  })
+
+  describe('baseHandler', () => {
+    it('should be normal response', () => {
+      expect(helper.baseHandler(0, {}, 'test msg')).toMatchObject({
+        code: 0,
+        data: {},
+        msg: 'test msg'
+      })
+    })
+  })
+
+  describe('successHandler', () => {
+    it('should be normal response', () => {
+      expect(helper.successHandler({}, 'success msg')).toMatchObject({
+        code: helper.HTTP_CODE.SUCCESS,
+        data: {},
+        msg: 'success msg'
+      })
+    })
+  })
+})

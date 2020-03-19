@@ -1,17 +1,30 @@
 {
-  "name": "apijson-node",
+  "name": "ai-apijson-node",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "build:front": "./scripts/build-front.sh",
     "dev": "npm run start:watch",
-    "start": "node index.js",
-    "start:watch": "nodemon",
-    "prestart:prod": "tsc",
-    "start:prod": "node dist/main.js",
+    "dev:front": "./scripts/dev-front.sh",
+    "dev:test": "cross-env NODE_ENV=test nodemon",
+    "start": "npm run test && tsc && NODE_ENV=test node ./dist/http/main.js",
+    "start:pm2": "npm run test && tsc && pm2 start ./pm2.config.json",
+    "start:watch": "cross-env NODE_ENV=development nodemon",
+    "dev:admin": "cd ./views/admin && npm run serve",
+    "build:admin": "cd ./views/admin && npm run build",
+    "prestart:test": "npm run test && tsc",
+    "start:test": "pm2 start ./pm2.config.test.json",
     "test": "jest --config=jest.json",
     "test:watch": "jest --watch --config=jest.json",
-    "test:coverage": "jest --config=jest.json --coverage --coverageDirectory=coverage"
+    "test:coverage": "jest --config=jest.json --coverage --coverageDirectory=coverage",
+    "review": "echo \"...\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run review"
+    }
   },
   "license": "ISC",
   "dependencies": {
@@ -23,29 +36,46 @@
     "@nestjs/testing": "^6.0.1",
     "@nestjs/typeorm": "^6.0.0",
     "@nestjs/websockets": "^6.0.1",
+    "axios": "^0.19.0",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
+    "connect-sqlite3": "^0.9.11",
+    "cookie-parser": "^1.4.4",
+    "create-react-app": "^3.2.0",
+    "cross-env": "^5.0.1",
     "crypto": "^1.0.1",
     "crypto-js": "^3.1.9-1",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "mysql": "^2.15.0",
+    "node-sql-parser": "^1.7.7",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0",
+    "sha1-hex": "^1.0.0",
     "slug": "^1.0.0",
+    "sqlite3": "^4.1.0",
+    "swagger-ui-express": "^4.0.7",
     "typeorm": "^0.2.15",
-    "typescript": "^3.3.1"
+    "xlsx": "^0.15.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.1",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.14.16",
+    "@types/sha1": "^1.1.2",
     "atob": ">=2.1.0",
     "deep-extend": ">=0.5.1",
     "extend": ">=3.0.2",
+    "husky": "^3.1.0",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10",
-    "supertest": "^3.0.0",
-    "ts-jest": "^24.0.0",
-    "ts-node": "^8.0.3"
+    "supertest": "^3.4.2",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^6.1.2",
+    "ts-node": "^8.0.3",
+    "typescript": "3.3.3333"
   }
 }

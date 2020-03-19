@@ -1,0 +1,91 @@
+import { jsonBodyParser, jsonBodyParserReturn } from './index'
+import { JOB_TYPE } from './traverse';
+
+describe('json-body-parser', () => {
+  it('should return a single job', () => {
+    const result: jsonBodyParserReturn = jsonBodyParser({
+      TestUser: {
+        unusedCondition: 'emm...',
+        id: 1
+      }
+    })
+    expect(result.queue.length).toBe(1)
+    expect(result.queue[0].$$type).toBe(JOB_TYPE.SINGLE)
+    expect(result.queue[0].table).toBe('TestUser')
+    expect(result.queue[0].options).toMatchObject({ id: 1 })
+    expect(result.queue[0].replacePath).toMatchObject(['TestUser'])
+  })
+
+  it('should return a array job', () => {
+    const result: jsonBodyParserReturn = jsonBodyParser({
+      'UserList[]': {
+        TestUser: {},
+        page: 1,
+        count: 5
+      }
+    })
+    expect(result.queue[0].$$type).toBe(JOB_TYPE.LIST)
+    expect(result.queue[0].table).toBe('TestUser')
+    expect(result.queue[0].ListOptions).toMatchObject({
+      page: 1,
+      count: 5
+    })
+    expect(result.queue[0].replacePath).toMatchObject(['UserList[]'])
+  })
+
+  it('should return a union job', () => {
+    const result: jsonBodyParserReturn = jsonBodyParser({
+      TestUser: {
+        user: 'kevin'
+      },
+      TestMsg: {
+        'userId@': 'TestUser/id'
+      }
+    })
+
+    expect(result.queue[0].$$type).toBe(JOB_TYPE.UNION)
+    expect(result.queue[0].table).toBe('TestMsg')
+    expect(result.queue[0].options).toMatchObject({
+      referArgs: ['TestUser', 'id'],
+      referVar: 'userId'
+    })
+    expect(result.queue[0].replacePath).toMatchObject(['TestMsg'])
+
+    expect(result.queue[1].$$type).toBe(JOB_TYPE.SINGLE)
+    expect(result.queue[1].table).toBe('TestUser')
+    expect(result.queue[1].options).toMatchObject({ user: 'kevin' })
+    expect(result.queue[1].replacePath).toMatchObject(['TestUser'])
+  })
+
+  it('should return a union list job', () => {
+    const result: jsonBodyParserReturn = jsonBodyParser({
+      TestUser: {
+        user: 'kevin'
+      },
+      'MsgList[]': {
+        TestMsg: {
+          'userId@': 'TestUser/id'
+        },
+        page: 1,
+        count: 5
+      }
+    })
+
+    expect(result.queue[0].$$type).toBe(JOB_TYPE.LIST_UNION)
+    expect(result.queue[0].table).toBe('TestMsg')
+    expect(result.queue[0].options).toMatchObject({
+      referArgs: ['TestUser', 'id'],
+      referVar: 'userId'
+    })
+    expect(result.queue[0].ListOptions).toMatchObject({
+      page: 1,
+      count: 5
+    })
+    expect(result.queue[0].replacePath).toMatchObject(['MsgList[]', 'TestMsg'])
+
+    expect(result.queue[1].$$type).toBe(JOB_TYPE.SINGLE)
+    expect(result.queue[1].table).toBe('TestUser')
+    expect(result.queue[1].options).toMatchObject({ user: 'kevin' })
+    expect(result.queue[1].replacePath).toMatchObject(['TestUser'])
+  })
+})

@@ -1,13 +1,11 @@
-import { UserEntity, User } from './user.entity'
-import { CommentEntity, Comment } from './comment.entity'
+import { LocalUserEntity, LocalUser } from './LocalUser.entity'
+
 
 const config = {
-  User,
-  Comment,
+  LocalUser
 }
 
 export {
-  UserEntity,
-  CommentEntity,
-  config
+  config,
+  LocalUserEntity
 }

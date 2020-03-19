@@ -1,0 +1,49 @@
+const SOURCE_PATH = (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') ? 'dist' : 'src'
+
+const testConfig = {
+  "type": "mysql",
+  "host": "192.168.3.28",
+  "port": 3306,
+  "username": "root",
+  "password": "realdoctor",
+  "database": "ai_union",
+  "entities": [`${SOURCE_PATH}/**/**.entity{.ts,.js}`],
+  "synchronize": false
+}
+
+const devConfig = {
+  // "type": "mysql",
+  // "host": "localhost",
+  // "port": 3306,
+  // "username": "root",
+  // "password": "Onekevin30",
+  // "database": "apijson",
+  // "entities": [`${SOURCE_PATH}/**/**.entity{.ts,.js}`],
+  // "synchronize": false
+
+  "type": "mysql",
+  "host": "192.168.3.28",
+  "port": 3306,
+  "username": "root",
+  "password": "realdoctor",
+  "database": "ai_union",
+  "entities": [`${SOURCE_PATH}/**/**.entity{.ts,.js}`],
+  "synchronize": false
+}
+
+const productionConfig = {
+  "type": "mysql",
+  "host": "10.20.200.217",
+  "port": 3307,
+  "username": "ai_union",
+  "password": "MxdLEiLyRNDdEfYJ",
+  "database": "ai_union",
+  "entities": [`${SOURCE_PATH}/**/**.entity{.ts,.js}`],
+  "synchronize": false
+}
+
+module.exports = process.env.NODE_ENV === 'production'
+  ? productionConfig
+  : process.env.NODE_ENV === 'development'
+    ? devConfig
+    : testConfig
