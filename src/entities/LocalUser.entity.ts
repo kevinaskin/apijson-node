@@ -7,12 +7,6 @@ export class LocalUserEntity {
 
   @Column()
   user: string
-
-  @Column()
-  nickname: string
-
-  @Column()
-  role: string
 }
 
 export const LocalUser = {
@@ -29,18 +23,6 @@ export const LocalUser = {
       "type": "string",
       "isPrimary": false
     },
-    {
-      "desc": "",
-      "key": "nickname",
-      "type": "string",
-      "isPrimary": false
-    },
-    {
-      "desc": "",
-      "key": "role",
-      "type": "string",
-      "isPrimary": false
-    }
   ],
   "primary": "id",
   "uuid": "",

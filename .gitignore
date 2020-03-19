@@ -3,3 +3,4 @@ dist
 ormconfig.js
 views/admin-v2
 *.map
+db/*.json
