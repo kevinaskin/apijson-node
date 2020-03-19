@@ -30,17 +30,9 @@ export class ApiJsonAppConfigController {
       const realPath = process.env.NODE_ENV === 'development'
         ? '../../entities/'
         : '../../../src/entities/'
-      // make copy
       const oldEntityList = await readdirSync(join(__dirname, realPath))
-      // const copyDirName = new Date().toISOString()
-      // console.log(join(__dirname, '../../../db/' + copyDirName))
-      // await mkdirSync(join(__dirname, '../../../db/' + copyDirName))
       for (let i = 0; i < oldEntityList.length; i++) {
         const name = oldEntityList[i]
-        // await copyFileSync(
-        //   join(__dirname, realPath + name),
-        //   join(__dirname, '../../../db/' + copyDirName + '/' + name),
-        // )
         // unlink file
         await unlinkSync(join(__dirname, realPath + name))
         console.log('unlink ' + name)
@@ -178,7 +170,6 @@ export class ApiJsonAppConfigController {
         })
         if (!res) throwError(`Invalid sql`, HttpStatus.BAD_GATEWAY)
         if (exec === 'CREATED') {
-          // writeFileSync(join(__dirname, '../../entities', `${res.entityName}.entity.ts`), res.tpl)
           if (id) {
             await this.configService.update('tableConfig', id, {
               name: dbNick.trim(),

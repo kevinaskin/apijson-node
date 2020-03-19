@@ -12,9 +12,6 @@ const POOL_SIZE: number = 100 // for current-limiting
 const RequestParserPool: RequestParser[] = []
 
 export function jsonBodyParser (queryBody: object): jsonBodyParserReturn {
-  // console.log('===')
-  // console.log('[RQ_INS]', RequestParserPool.length)
-  // console.log('===')
   if (RequestParserPool.length < POOL_SIZE) {
     const RPInstance = new RequestParser(queryBody)
     RequestParserPool.push(RPInstance)
@@ -47,9 +44,6 @@ function getFreeRequestParser (pool: RequestParser[]): RequestParser | null {
       return pool[i]
     }
   }
-  console.log('=== POOL ===')
-  console.log(JSON.stringify(pool, null, 2))
-  console.log('=== POOL ===')
   console.error('[error] Cannot get a free RequestParser')
   return null
 }

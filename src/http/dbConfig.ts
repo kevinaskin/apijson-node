@@ -34,7 +34,7 @@ export const dbConfig = [
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "Onekevin30",
+    password: "", // local mysql password
     database: "apijson",
     entities: [ `${ [ 'development' ].indexOf(process.env.NODE_ENV) > -1 ? 'src' : 'dist' }/**/**.entity{.ts,.js}` ],
     synchronize: false

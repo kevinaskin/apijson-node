@@ -15,16 +15,9 @@ async function bootstrap(port = 9771) {
   const appOptions = {
     cors: {
       origin: process.env.NODE_EVN === 'production' ? [
-        /\.guahao\.cn$/, /\.guahao\.com$/,
-        /\.guahao-test\.com$/,
-        /\.guahao-test\.cn$/,
+        // cors host
       ] : [
-        /\.guahao\.cn$/, /\.guahao\.com$/,
-        /\.guahao-test\.com$/,
-        /\.guahao-test\.cn$/,
-        /192.168.94.186/, // 测试环境服务器
-        /127.0.0.1/,
-        /localhost/
+        // cors host
       ],
       methods: 'GET,POST',
       optionsSuccessStatus: 204,

@@ -164,7 +164,6 @@ export class RequestParser {
   }
 
   handleUnionJob(key: string, body: any, parentPath: string[]): void {
-    // console.log('start UNION_JOB', key, body, parentPath)
     if (typeof body !== 'string') {
       this.errors.push(`[ERROR] invalid union job syntax at key "${key}"`)
       return
@@ -186,8 +185,6 @@ export class RequestParser {
   }
   
   handleListJob(key: string, body: any, parentPath: string[]): void {
-    // console.log('start LIST_JOB', key, body, parentPath)
-
     let LIST_JOB_FLAG = true
 
     const fields = Object.keys(body)
@@ -524,7 +521,6 @@ export class RequestParser {
       this.queue.splice(0, 0, job)
     }
     this.jobIds.push(job.id)
-    // console.log('ADD_JOB: ', JSON.stringify(job, null, 2))
   }
 
   flushJob () {

@@ -14,10 +14,4 @@ describe('AppController', () => {
     })
   })
 
-  // describe('can-i-use', () => {
-  //   it('should return a list of entities and description', async () => {
-  //     const { TestMsg, TestUser, ...rest } = config
-  //     expect(await appController.getEntity()).toMatchObject({...rest})
-  //   })
-  // })
 })
