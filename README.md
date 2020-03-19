@@ -18,7 +18,9 @@ $ npm install
 2.启动项目
 
 ```shell
-$ npm run dev
+$ npm run dev # 开发
+
+$ npm run start # 正式
 ```
 
 
