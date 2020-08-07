@@ -37,7 +37,7 @@
     "@nestjs/typeorm": "^6.0.0",
     "@nestjs/websockets": "^6.0.1",
     "axios": "^0.19.0",
-    "class-transformer": "^0.2.0",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.9.1",
     "connect-sqlite3": "^0.9.11",
     "cookie-parser": "^1.4.4",
