@@ -58,7 +58,7 @@
     "slug": "^1.0.0",
     "sqlite3": "^4.1.0",
     "swagger-ui-express": "^4.0.7",
-    "typeorm": "^0.2.15",
+    "typeorm": "^0.2.25",
     "xlsx": "^0.15.1"
   },
   "devDependencies": {
