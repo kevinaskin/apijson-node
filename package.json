@@ -59,7 +59,7 @@
     "sqlite3": "^4.1.0",
     "swagger-ui-express": "^4.0.7",
     "typeorm": "^0.2.15",
-    "xlsx": "^0.15.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
