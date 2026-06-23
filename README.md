@@ -1,4 +1,4 @@
-# ApiJson Node版
+# ApiJson Node版 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/kevinaskin/apijson-node)
 
 > ### A ApiJson Server build with Nest.js and TypeORM
 
